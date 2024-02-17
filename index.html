@@ -4,12 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        li{
+            width: 100px;
+            height: 80px;
+            border: 2px solid black;
+            background-color: skyblue;
+            list-style: none;
+            text-align: center;
+            font-size: large;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+    </style>
 </head>
 <body>
-    <button></button>
-    <div id="greeting"></div>
+    <section id="calender">
+        <p>Select a month</p>
+        <select id="months">
+            <option value="">--Pick a month--</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+        <h1></h1>
+        <ul>
+            
+        </ul>
+    </section>
+
+    <section id="theme-color">
+        <h3>Live Output</h3>
+        <select id="themes">
+            <option value="">---Pick A color---</option>
+            <option value="White">White</option>
+            <option value="Black">Black</option>
+            <option value="Purple">Purple</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Psychedelic">Psychedelic</option>
+        </select>
+
+    </section>
+
+
+
     <script>
-        /*Javascript.info logical operator exercise */
+        /*Javascript.info logical operator exercise 
         let userName = prompt("Who is there")
         console.log(userName)
         if(userName === "Admin"){
@@ -28,6 +87,76 @@
             alert("I don't know you")
         }
         /* ------- */
+
+        /* MDN WebDocs simple calender */
+        const select = document.getElementById("months")
+        const list = document.querySelector("ul")
+        const h1 = document.querySelector("h1")
+
+        select.addEventListener('change', () => {
+            const choice = select.value
+            console.log(choice)
+            let days;
+            if(choice === ("April" || "June" || "September" || "November")){
+                days=30
+            }else if(choice === "February"){
+                days=28
+            }else {
+                days=31
+            }
+            createCalender(days,choice)
+
+        })
+
+        function createCalender(days,choice){
+            list.innerHTML = ``
+            h1.textContent = choice
+            for(let i=1; i<=days; i++){
+                const listItem = document.createElement('li')
+                listItem.textContent = i
+                list.appendChild(listItem)
+            }
+        }
+        /* --------- */
+
+        /* Change Theme color assignment from MDN WebDocs */
+        const sectionTheme = document.getElementById("theme-color")
+        console.log(sectionTheme)
+        const selectThemes = document.getElementById("themes")
+
+        selectThemes.addEventListener('change' , () => {
+            const choice2 = selectThemes.value
+            switch(choice2){
+                case 'White':
+                    update(choice2,'Black')
+                    break
+                case 'Black':
+                    update(choice2,'White')
+                    break
+                case 'Purple':
+                    update(choice2,'White')
+                    break
+                case 'Yellow': 
+                    update(choice2,'Purple')
+                    break
+                case 'Psychedelic':
+                    update('lime','Black')
+                    break
+                default : 
+                    break
+            }
+        })
+
+        function update(bgColor, txtColor){
+            sectionTheme.style.backgroundColor = bgColor
+            sectionTheme.style.color = txtColor
+        }
+
+        /* ------ */
+
+        
+              
+
         
      </script>
 </body>
